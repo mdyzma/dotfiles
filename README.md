@@ -1,4 +1,10 @@
 # Dotfiles automation
+## Quickstart
+
+```bash
+export GITHUB_USERNAME=mdyzma
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+```
 
 ## Summary
 Software development landscape has undergone a fundamental shift from manual, curated workstation management to automated, reproducible infrastructure. As of 2026, the convergence of high-performance tooling—often written in system-level languages like Rust—and sophisticated configuration management utilities has enabled developers to treat their local machines with the same rigor as production servers. This report presents a comprehensive project plan and technical implementation guide for automating the setup of a high-efficiency development environment across the three dominant operating systems: macOS Tahoe, Windows 11, and Ubuntu LTS 24.
@@ -46,3 +52,26 @@ The proposed repository structure for the project is as follows:
 ```
 * _bootstrap.sh_: macOS and Ubuntu Bootstrapper. This script must detect the OS, install the package manager (Homebrew), and then install Chezmoi to take over the rest of the process.
 * _bootstrap.ps1_ : Windows Bootstrapper, allows winget and WSL2 forbasic tools installation
+
+
+### Editor Configuration (Zed & VS Code)
+
+### Browser Automation & Bookmarks
+
+### Local AI and Containerization
+
+#### Local AI: Ollama
+
+Ollama serves as the local backend for AI completion. We install it, then use a script to pull models.\
+
+Setting the environment variable OLLAMA_HOST=0.0.0.0 is recommended if you plan to access these models from inside Docker containers (e.g., a containerized app making API calls to the host).
+
+#### Containerization
+macOS: OrbStack is the default. It requires zero configuration. The docker command is automatically symlinked.
+Windows: Docker Desktop requires the "Use WSL 2 based engine" setting to be enabled. This is usually the default, but can be enforced via the settings.json located at %APPDATA%\Docker\settings.json.
+
+### Local automation (n8n)
+
+
+
+This project plan leverages the strengths of the "Rust Era" tools (WezTerm, Zed, OrbStack) to minimize latency and resource usage, while utilizing Chezmoi to handle the complex reality of cross-platform file management. The result is a developer environment that is robust, reproducible, and highly performant.
