@@ -11,13 +11,16 @@ chezmoi init --apply $GITHUB_USERNAME
 ## Folder structure
 
 ```bash
-.local/share/chezmoi
+~/.local/share/chezmoi
 ├── .chezmoi.toml.tmpl
+├── .gitignore
+│
 ├── dot_zshenv
 ├── dot_zprofile
 ├── dot_zshrc
-├── dot_config
-│   ├── zsh
+│
+├── dot_config/
+│   ├── zsh/
 │   │   ├── env.zsh
 │   │   ├── aliases.zsh
 │   │   ├── interactive.zsh
