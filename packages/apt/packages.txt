@@ -1,0 +1,22 @@
+# Core
+curl
+git
+wget
+ca-certificates
+
+# CLI tools
+bat
+eza
+htop
+lazygit
+fastfetch
+tree
+mc
+
+# Dev
+python3
+python3-pip
+build-essential
+
+# Fonts
+fonts-jetbrains-mono

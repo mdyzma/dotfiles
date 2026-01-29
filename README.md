@@ -12,22 +12,39 @@ chezmoi init --apply $GITHUB_USERNAME
 
 ```bash
 ~/.local/share/chezmoi
-├── .chezmoi.toml.tmpl
-├── .gitignore
+├── run_once
+│   ├── run_once_install_unix.sh.tmpl
+│   ├── run_once_install_windows.ps1.tmpl
+│   ├── run_once_install_fonts_unix.sh.tmpl
+│   └── run_once_install_fonts_windows.ps1.tmpl
 │
-├── dot_zshenv
-├── dot_zprofile
-├── dot_zshrc
+├── packages
+│   ├── brew
+│   │   └── Brewfile
+│   ├── apt
+│   │   └── packages.txt
+│   └── dnf
+│       └── packages.txt
 │
-├── dot_config/
-│   ├── zsh/
+├── fonts
+│   └── IntelliJMonoNerdFont #(48 fonts)
+│       ├── IntelliJMonoNerdFont-Regular.ttf
+│       ├── IntelliJMonoNerdFont-Bold.ttf
+│       ├── IntelliJMonoNerdFont-Italic.ttf
+│       ├── IntelliJMonoNerdFont-BoldItalic.ttf
+│       └── ...
+│
+├── dot_config
+│   ├── zsh
 │   │   ├── env.zsh
 │   │   ├── aliases.zsh
 │   │   ├── interactive.zsh
 │   │   └── platform.zsh.tmpl
 │   └── starship.toml
-├── packages
-│   └── brew
-│       └── Brewfile
+│
+├── dot_zshenv
+├── dot_zprofile
+├── dot_zshrc
+│
 └── README.md
 ```

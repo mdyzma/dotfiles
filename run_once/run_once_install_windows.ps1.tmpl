@@ -1,0 +1,31 @@
+Write-Output "=== Windows bootstrap ==="
+
+$SourceDir = "{{ .chezmoi.sourceDir }}"
+$Editor = "{{ .chezmoi.data.editor }}"
+$FontName = "{{ .chezmoi.data.font }}"
+Write-Output "Preferred editor: $Editor"
+Write-Output "Installing font: $FontName"
+
+# ------------------------------
+# 1️⃣ Packages via winget
+# ------------------------------
+$packages = @(
+{{ range .chezmoi.data.packages_windows }}    "{{ . }}",
+{{ end }}
+)
+
+foreach ($pkg in $packages) {
+    winget install --id $pkg -e --source winget
+}
+
+# ------------------------------
+# 2️⃣ Fonts
+# ------------------------------
+$FontSource = Join-Path $SourceDir "fonts\$FontName"
+$FontsFolder = "$env:WINDIR\Fonts"
+
+Get-ChildItem $FontSource -Filter *.ttf | ForEach-Object {
+    Copy-Item $_.FullName $FontsFolder -Force
+}
+
+Write-Output "=== Windows bootstrap complete ==="

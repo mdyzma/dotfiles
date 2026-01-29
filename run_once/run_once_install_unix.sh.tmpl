@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+OS="{{ .chezmoi.os }}"
+SRC="{{ .chezmoi.sourceDir }}"
+
+EDITOR="{{ .chezmoi.data.editor }}"
+FONT="{{ .chezmoi.data.font }}"
+echo "=== Unix bootstrap ($OS) ==="
+echo "Preferred editor: $EDITOR"
+echo "Installing font: $FONT"
+
+# ------------------------------
+# 1️⃣ Packages
+# ------------------------------
+if [[ "$OS" == "darwin" ]]; then
+    echo "→ Installing macOS packages"
+    if ! command -v brew >/dev/null; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+    for pkg in {{ range .chezmoi.data.packages_mac }}"{{ . }}" {{ end }}; do
+        brew install "$pkg" || brew upgrade "$pkg"
+    done
+
+elif [[ "$OS" == "linux" ]]; then
+    if command -v apt >/dev/null; then
+        echo "→ Installing Ubuntu/Debian packages"
+        sudo apt update
+        for pkg in {{ range .chezmoi.data.packages_ubuntu }}"{{ . }}" {{ end }}; do
+            sudo apt install -y "$pkg"
+        done
+    elif command -v dnf >/dev/null; then
+        echo "→ Installing Fedora packages"
+        sudo dnf upgrade -y
+        for pkg in {{ range .chezmoi.data.packages_fedora }}"{{ . }}" {{ end }}; do
+            sudo dnf install -y "$pkg"
+        done
+    fi
+fi
+
+# ------------------------------
+# 2️⃣ Fonts
+# ------------------------------
+echo "→ Installing fonts"
+
+if [[ "$OS" == "darwin" ]]; then
+    FONT_DST="$HOME/Library/Fonts"
+else
+    FONT_DST="$HOME/.local/share/fonts"
+    mkdir -p "$FONT_DST"
+fi
+
+cp "$SRC/fonts/$FONT"/*.ttf "$FONT_DST"
+
+# Refresh font cache for Linux
+if [[ "$OS" == "linux" ]] && command -v fc-cache >/dev/null; then
+    fc-cache -f
+fi
+
+echo "=== Unix bootstrap complete ==="
