@@ -1,0 +1,15 @@
+# CLI tools
+brew "eza"
+brew "fastfetch"
+brew "htop"
+brew "lazygit"
+brew "starship"
+brew "wget"
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+
+# GUI apps
+cask "ghostty"
+cask "orbstack"
+cask "visual-studio-code"

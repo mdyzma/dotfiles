@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "darwin" }}
+export PATH="/opt/homebrew/bin:$PATH"
+{{ end }}
+
+{{ if eq .chezmoi.os "linux" }}
+export PATH="$HOME/.local/bin:$PATH"
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+export PATH="$HOME/AppData/Local/Programs:$PATH"
+{{ end }}

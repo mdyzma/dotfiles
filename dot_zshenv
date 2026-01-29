@@ -1,0 +1,5 @@
+# Rust
+. "$HOME/.cargo/env" 2>/dev/null || true
+
+# Pyenv root (needed early)
+export PYENV_ROOT="$HOME/.pyenv"

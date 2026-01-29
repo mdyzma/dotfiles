@@ -1,0 +1,7 @@
+# Load modular zsh files
+for file in ~/.config/zsh/*.zsh; do
+  source "$file"
+done
+
+# Starship prompt
+eval "$(starship init zsh)"
