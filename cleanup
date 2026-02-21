@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+echo "🧹 Starting system cleanup..."
+
+# =========================================
+# Homebrew
+# =========================================
+echo "\n🍺 Cleaning up Homebrew..."
+# Removes stale lockfiles and outdated downloads
+brew cleanup -s
+# Checks for missing dependencies
+brew missing
+
+# =========================================
+# NPM
+# =========================================
+echo "\n📦 Cleaning up NPM cache..."
+# Clears the global npm cache 
+npm cache clean --force
+
+# =========================================
+# Python / Pyenv
+# =========================================
+echo "\n🐍 Cleaning up Pyenv cache..."
+# Targets the custom XDG cache path you defined in your .zshrc
+if [ -d "$HOME/.cache/pyenv" ]; then
+  rm -rf "$HOME/.cache/pyenv/"*
+  echo "Pyenv downloads cache cleared."
+else
+  echo "No Pyenv cache found at $HOME/.cache/pyenv."
+fi
+
+# =========================================
+# macOS DNS (Optional but helpful)
+# =========================================
+echo "\n🌐 Flushing DNS cache..."
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+
+echo "\n✨ Cleanup complete!"
