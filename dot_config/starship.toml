@@ -6,7 +6,7 @@ command_timeout = 1000
 # Inserts a blank line between shell prompts
 add_newline = true
 
-format = """$env_var$os$username$hostname$kubernetes$directory$git_branch$git_status$python
+format = """$env_var$os$username$hostname$kubernetes$directory$git_branch$git_status$python$cmd_duration
 $character
 """
 
@@ -33,6 +33,7 @@ Arch = '󰣇'
 Ubuntu = ''
 Macos = '󰀵'
 Unknown = '󰠥'
+Pop = "🐧 "
 
 # ---y
 
@@ -64,7 +65,7 @@ style = '#7ed1fb' # yellow bold
 # Shows current git branch
 
 [git_branch]
-symbol = "🌱 "
+symbol = ' '
 #truncation_length = 18
 format = '[//](black bold) [$symbol\[$branch\]]($style) '
 style = 'bold green'
@@ -104,8 +105,11 @@ disabled = true
 disabled = true
 
 [python]
-symbol = '󰌠'
+disabled = false
+symbol = '󰌠 '
+pyenv_version_name = true
 python_binary = ['./venv/bin/python', 'python', 'python3', 'python2']
+detect_files = ['.python-version', 'pyproject.toml', 'requirements.txt', 'Pipfile']
 format = '[//](black bold) [${symbol} ${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) '
 
 [nodejs]
